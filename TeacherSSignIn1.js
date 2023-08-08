@@ -37,7 +37,6 @@ function LoadTeachers(){
       })
       
   })
-  console.log( DataTeachers)
 }
 
  function ConvertMode(){

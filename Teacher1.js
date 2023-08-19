@@ -270,28 +270,46 @@ function ConvertModeToMoon(){
 }  
 // *************************************Main**************
 function ShowTeacherBrowser(){
-  ShowSelectForm("TeacherSBrowser");
-  LoadTeachersToTable();
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
+    ShowSelectForm("TeacherSBrowser");
+    LoadTeachersToTable();
+  }
 }
 function ShowClassBrowser(){
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
   ShowSelectForm("ClassSBrowser");
   LoadClassToTable();
 }
+}
 function ShowMatBrowser(){
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
   ShowSelectForm("MatBrowser");
   LoadMatToTable();
+  }
 }
 function ShowContractBrowser(){
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
   ShowSelectForm("ContractBrowser");
   LoadContractToTable();
+  }
 }
 function ShowStudentBrowser(){
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
   ShowSelectForm("StudentBrowser");
   LoadStudentToTable();
+  }
 }
 function ShowTableBrowser(){
+  let Index=localStorage.getItem("Teacher_Index");
+  if (DataTeachers[Index].IsAdmin=="yes"){
   ShowSelectForm("TableBrowser");
   LoadTableToTable();
+  }
 }
 function ShowTableEnD(){
   ShowSelectForm("TableEnd");

@@ -1027,8 +1027,8 @@ function onsubmitFormContract(){
         let ZZ=[];
         let SS=String(Str).substring(5,String(Str).length-1);
         ZZ=SS.split(",");
-        if (ZZ[1]<=9){ MM=0 + String(parseInt(ZZ[1]) + 1)}else{ MM=(parseInt(ZZ[1]) + 1)}
-        if (ZZ[2]<=9){ DD=0 + ZZ[2]}else{ DD=ZZ[2]}
+        if (Number(ZZ[1])<9 && Number(ZZ[1]).length!= 2){ MM=0 + String(parseInt(ZZ[1]) + 1)}else{ MM=(parseInt(ZZ[1]) + 1)}
+        if (Number(ZZ[2])<9 && Number(ZZ[1]).length!= 2){ DD=0 + ZZ[2]}else{ DD=ZZ[2]}
         return ZZ[0] + "-" + MM + "-" + DD
       }
       function showdatarowsCon() {

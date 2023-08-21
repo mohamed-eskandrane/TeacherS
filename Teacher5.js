@@ -313,7 +313,13 @@ function ShowTableBrowser(){
 }
 function ShowTableEnD(){
   ShowSelectForm("TableEnd");
-  LoadEndToTable();
+ 
+  let TableSelect=document.getElementById("TableSelect").value
+  if (TableSelect==1){
+    LoadEndToTable();
+  }else{
+    LoadEndToTableSection();
+  }
 }
 function SignOutUser(){
   localStorage.removeItem("Teacher_Index");
@@ -410,14 +416,17 @@ function AddRow(Num,Fname,Phone,Gender,Email) {
     })
   }
   function LoadOptionClassMat(){
-    let Num,ClassN;
+    let Num,ClassN,SectionN;
     let optionClass,optionContract;
     document.getElementById("MatClass").innerHTML="";
     document.getElementById("ClassCon").innerHTML="";
     document.getElementById("SClass").innerHTML="";
     document.getElementById("ClassT").innerHTML="";
+    document.getElementById("TableSection").innerHTML="";
+    
     for (let index = 0; index < DataClass.length; index++) {
       ClassN=DataClass[index].ClassName
+      SectionN=DataClass[index].Section
       Num=DataClass[index].Number
       if(Num!=""){
         optionClass=document.createElement("option");
@@ -436,6 +445,10 @@ function AddRow(Num,Fname,Phone,Gender,Email) {
         optionClass.value=ClassN;
         optionClass.textContent=ClassN;
         document.getElementById("ClassT").appendChild(optionClass);
+        optionClass=document.createElement("option");
+        optionClass.value=ClassN + "/" + SectionN;
+        optionClass.textContent=ClassN + "/" + SectionN;
+        document.getElementById("TableSection").appendChild(optionClass);
       }
     }
   }
@@ -1475,9 +1488,57 @@ function showdatarowsTable() {
 };
 // **************************TableEnd***********
 function LoadEndToTable(){
+let bodydata=document.getElementById("bodyEnd");
+bodydata.innerHTML=""
+let TableTeacher=document.getElementById("TableTeacher").value;
+let TableSemster=document.getElementById("TableSemster").value;
+let SDateT=document.getElementById("SDateT").value;
+let EDateT=document.getElementById("EDateT").value;
+let Num ,SemesterT,TeacherT,DateT,MatT,ClassT,SectionT;
+let Start=new Date(SDateT)
+let EndS=new Date(EDateT)
+const diffTime = Math.abs(EndS - Start);
+const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+for (let indexZ = 0; indexZ <= diffDays; indexZ++) {
+if(indexZ == 0){Start=Math.abs( Start.valueOf()) }else{    Start=Math.abs( Start.valueOf() +  1000 *60 *60 *24)}
+var Start1=new Date(Start)
+var Start2=Start1.toISOString().slice(0, 10);
+let row = bodydata.insertRow();
+row.id="Row" + bodydata.childElementCount;
+let cell = row.insertCell();
+cell.id="Cell" + bodydata.childElementCount + "DayT";
+cell.innerHTML = GetDayName(Start1.getUTCDay());
+cell = row.insertCell();
+cell.id="Cell" + bodydata.childElementCount + "DateT";
+cell.innerHTML = Start2;
+for (let indexP1 = 0; indexP1 < DataPeriod.length; indexP1++) {
+cell = row.insertCell();
+cell.id="R" + bodydata.childElementCount + "C" +indexP1;
+}
+for (let index = 0; index < DataTable.length; index++) {
+SemesterT=DataTable[index].SemesterT;
+TeacherT=DataTable[index].TeacherT;
+MatT=DataTable[index].MatT;
+ClassT=DataTable[index].ClassT;
+SectionT=DataTable[index].SectionT;
+DateT=GetDateFromString( DataTable[index].DateT);
+if(TableSemster==SemesterT && TableTeacher==TeacherT && DateT==Start2 ){
+for (let indexP = 0; indexP < DataPeriod.length; indexP++) {
+if(DataPeriod[indexP].PeriodName==DataTable[index].Period){
+var CellT=document.getElementById("R" + bodydata.childElementCount + "C" +indexP)
+CellT.innerHTML = "مادة "+MatT + " صف "+ClassT + " شعبة "+SectionT;
+CellT.className="CellRow"
+}}}}}
+}
+
+function LoadEndToTableSection(){
   let bodydata=document.getElementById("bodyEnd");
   bodydata.innerHTML=""
-  let TableTeacher=document.getElementById("TableTeacher").value;
+  let TableSection=document.getElementById("TableSection").value;
+  let TableSectionA=[];
+   TableSectionA=TableSection.split("/")
+   let  TableSectionC=TableSectionA[0];
+   let  TableSectionS=TableSectionA[1];
   let TableSemster=document.getElementById("TableSemster").value;
   let SDateT=document.getElementById("SDateT").value;
   let EDateT=document.getElementById("EDateT").value;
@@ -1495,13 +1556,12 @@ const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     let cell = row.insertCell();
     cell.id="Cell" + bodydata.childElementCount + "DayT";
     cell.innerHTML = GetDayName(Start1.getUTCDay());
-     cell = row.insertCell();
+      cell = row.insertCell();
     cell.id="Cell" + bodydata.childElementCount + "DateT";
     cell.innerHTML = Start2;
     for (let indexP1 = 0; indexP1 < DataPeriod.length; indexP1++) {
       cell = row.insertCell();
       cell.id="R" + bodydata.childElementCount + "C" +indexP1;
-      
     }
   for (let index = 0; index < DataTable.length; index++) {
     SemesterT=DataTable[index].SemesterT;
@@ -1510,15 +1570,28 @@ const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     ClassT=DataTable[index].ClassT;
     SectionT=DataTable[index].SectionT;
     DateT=GetDateFromString( DataTable[index].DateT);
-    if(TableSemster==SemesterT && TableTeacher==TeacherT && DateT==Start2 ){
+    if(TableSemster==SemesterT && TableSectionC==ClassT  && TableSectionS==SectionT && DateT==Start2 ){
       for (let indexP = 0; indexP < DataPeriod.length; indexP++) {
       if(DataPeriod[indexP].PeriodName==DataTable[index].Period){
         var CellT=document.getElementById("R" + bodydata.childElementCount + "C" +indexP)
-        CellT.innerHTML = "مادة "+MatT + " صف "+ClassT + " شعبة "+SectionT;
+        CellT.innerHTML = "مادة "+MatT + " المعلم "+TeacherT ;
         CellT.className="CellRow"
       }
       }
     }
   }
-}
   }
+}
+
+function ChangeMode(){
+  let TableSelect=document.getElementById("TableSelect").value
+  let TableTeacher=document.getElementById("TableTeacher")
+  let TableSection=document.getElementById("TableSection")
+  if (TableSelect==1){
+    TableTeacher.style.display="block"
+    TableSection.style.display="none"
+  }else{
+    TableTeacher.style.display="none"
+    TableSection.style.display="block"
+  }
+}

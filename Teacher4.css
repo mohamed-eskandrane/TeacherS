@@ -97,6 +97,7 @@
     }
     thead{
         position: relative !important;
+        border: 2px solid var(--Row1Color) !important;;
     }
 
  }

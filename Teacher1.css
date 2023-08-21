@@ -12,6 +12,8 @@
     --TDColor:yellow;
     
 }
+
+
 @media screen and (min-width: 300px) and (max-width: 450px) {
     :root{
         --Width:98%;
@@ -47,7 +49,54 @@
     }
 }
 
+@media print {
+    html{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    form{
+        height: 100% !important;
+        border: none !important;
+        padding: none !important;
+    }
+    .login-box {
+        width: 96% !important;
+        border: none !important;
+        box-sizing: unset !important;
+        box-shadow: none !important;
+        position: relative !important;
+        height: 100% !important;
+        }
+    #TableSelect{
+        display: none  !important;
+    }
+    .hh .SignOut{
+        display: none  !important;
+    }
 
+    .hh{
+        border: none !important;
+        position: absolute !important;
+
+    }
+ 
+    h5{
+    display: none;
+    }
+    .tabdata{
+        overflow: unset !important;
+        position: absolute !important;
+        padding:none !important;
+        height: 100% !important;
+        border: none !important;
+        page-break-inside: auto !important;
+        
+    }
+    .BA{
+        display: none!important;
+    }
+
+ }
 html {
 height: 100%;
 }
@@ -72,7 +121,7 @@ form{
     border-top: solid 1px var(--Row1Color);
     border-right: solid 1px var(--Row1Color);
     border-left: solid 1px var(--Row1Color);
-    height: 50px;
+    height: 40px;
     align-items: center;
 
 }
@@ -81,10 +130,10 @@ form{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
     width: var(--Width);
-    height: 80%;
+    height: 85%;
     padding: 1%;
     transform: translate(-50%, -50%);
     background-color: var(--loginColor);
@@ -103,8 +152,19 @@ form{
         font-size: 18px;
     }
     h1 {
+        color: var(--Font2Color);
+        text-align: right;
+        margin-right: 26px;
+        }
+    h2 {
     color: var(--Font2Color);
     text-align: center;
+    }
+    h5{
+        position: absolute;
+        bottom: -2%;
+        left: 50%;
+        color: var(--Font2Color);
     }
 .First_Row,.Second_Row{
     display: flex;
@@ -420,16 +480,6 @@ border-color: var(--FColor);
     background-color: var(--EColor);
 }
 
-.dropdown-content {
-    display: block;
-    position: absolute;
-    background-color: var(--EColor);
-    min-width: calc( var(--FrWidth));
-    overflow: auto;
-    z-index: 0;
-    top: 249px;
-    box-shadow: 0 0 5px var(--Font2Color), 0 0 25px var(--Font2Color), 0 0 50px var(--Font2Color);
-}
 
 .Unshow {display: none; }
 
@@ -485,7 +535,7 @@ width: 70%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center; 
-    height: 85%;
+    height: 92%;
 }
 .tabdata{
     display: flex;
@@ -503,14 +553,14 @@ width: 70%;
     padding-bottom: 1%;
     padding-top: 1%;
     width: 98%;
-    margin-top: 2%;   
-    position: relative;
+    margin-top: 1%;   
 }
   td {
     border: 1px solid  var(--Row1Color);
     text-align: center;
     vertical-align:middle;
-    color: var(--Font2Color);
+    color:  var(--Font2Color);
+    font-size: 18px;
 }
 th {
     color: var(--Font2Color);
@@ -531,3 +581,4 @@ th {
   .CellRow{
     background-color:var(--TDColor) ;
   }
+  

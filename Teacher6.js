@@ -315,7 +315,7 @@ function ShowTableEnD(){
   ShowSelectForm("TableEnd");
  
   let TableSelect=document.getElementById("TableSelect").value
-  if (TableSelect==1){
+  if (TableSelect=="1"){
     LoadEndToTable();
   }else{
     LoadEndToTableSection();
@@ -1587,7 +1587,7 @@ function ChangeMode(){
   let TableSelect=document.getElementById("TableSelect").value
   let TableTeacher=document.getElementById("TableTeacher")
   let TableSection=document.getElementById("TableSection")
-  if (TableSelect==1){
+  if (TableSelect=="1"){
     TableTeacher.style.display="block"
     TableSection.style.display="none"
   }else{

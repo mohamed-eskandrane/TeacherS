@@ -14,13 +14,15 @@
 }
 
 
-@media screen and (min-width: 300px) and (max-width: 450px) {
+@media screen and (min-width: 200px) and (max-width: 450px) {
     :root{
         --Width:98%;
         --FrWidth:35%;
         --BWidth:35%;
         --LWidth:35%;
-
+        --fontZ:14px;
+        --fontX:12px;
+        --fonty:12px;
     }
   }
 @media screen and (min-width: 451px)and (max-width: 650px)  {
@@ -29,6 +31,9 @@
         --FrWidth:35%;
         --BWidth:35%;
         --LWidth:35%;
+        --fontZ:16px;
+        --fontX:14px;
+        --fonty:13px;
     }
 }
 
@@ -38,6 +43,9 @@
         --FrWidth:40%;
         --BWidth:35%;
         --LWidth:35%;
+        --fontZ:18px;
+        --fontX:16px;
+        --fonty:14px;
     }
 }
 @media screen and (min-width: 801px)  {
@@ -46,6 +54,9 @@
         --FrWidth:45%;
         --BWidth:35%;
         --LWidth:35%;
+        --fontZ:18px;
+        --fontX:16px;
+        --fonty:14px;
     }
 }
 
@@ -80,7 +91,7 @@
 
     }
  
-    h5{
+    h4{
     display: none;
     }
     .tabdata{
@@ -144,7 +155,7 @@ form{
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
-    font-size: 18px;
+    font-size: var(--fontZ);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     }
@@ -153,21 +164,22 @@ form{
     }
 
     button{
-        font-size: 18px;
+        font-size: var(--fontZ);
     }
     h1 {
         color: var(--Font2Color);
         text-align: right;
-        margin-right: 26px;
+        text-align: center;
         }
     h2 {
     color: var(--Font2Color);
     text-align: center;
     }
-    h5{
+    h4{
         position: absolute;
         bottom: -2%;
-        left: 50%;
+        left:calc(50% - 60px );
+        text-align: center;
         color: var(--Font2Color);
     }
 .First_Row,.Second_Row{
@@ -212,7 +224,7 @@ text-align: center;
 .UserName_Div input{
     width: 75%;
     text-align: center;
-    font-size: 16px;
+    font-size: var( --fontX);
     font-weight: 600;
     border: none;
     height: 25px;
@@ -253,7 +265,7 @@ text-align: center;
 .NewBr{
     width: 17.5%;
     padding: 4px 0;
-    font-size: 14px;
+    font-size: var(--fonty);
     color: var(--Font2Color);
     border: 1px solid var(--FontColor);
     font-weight: bolder;
@@ -314,7 +326,7 @@ padding-right: 5px;
    }
 .user-box input , .user-box select ,.hh select ,.hh input{
     width: 70%;
-    font-size: 16px;
+    font-size: var( --fontX);
     color: var(--Font3Color);
     outline: none;
     background-color: var(--inputBackColor);
@@ -361,7 +373,7 @@ color: white;
 
 .SignOut{
     display: flex;
-    font-size: 17px;
+    font-size: calc(var(--fontZ) - 1 );
     font-weight: 600;
     color: white;
     border: 1px solid transparent;
@@ -391,7 +403,7 @@ width:100% ;
     }
 
 .Buto a {   
-    font-size: 20px;
+    font-size: calc(var(--fontZ) + 2 );
     margin-right: 5px;
 }
 
@@ -511,7 +523,7 @@ border-color: var(--FColor);
     border:  none;
     width: 75%;
     height: 66%;
-    font-size: 14px;
+    font-size: calc(var(--fontZ) - 2 );
     padding: 2px 1px;
 
 }
@@ -526,13 +538,15 @@ width: 70%;
     }
 #error_Branch_ID,#error_User_ID{
         margin-left: 1%; 
-        font-size:28px;color:red; 
+        font-size:28px;
+        color:red; 
         width: 5%;
 }
 #Eye_Password{
     margin-left: 1%;
     margin-right: 1%;
-    font-size:25px;color:green; 
+    font-size:25px;
+    color:green; 
     width: 5%;
 }
 #TeacherSBrowser form,#ClassSBrowser form,#MatBrowser form,#ContractBrowser form , #StudentBrowser form , #TableBrowser form,#TableEnd form{
@@ -547,7 +561,7 @@ width: 70%;
     position: relative;
     border: 1px solid  var(--Row1Color);
     align-items: center;
-    font-size: 20px;   
+    font-size: calc(var(--fontZ) + 2);   
     font-family: Arial, Helvetica, sans-serif;
     justify-content:flex-start ;
     justify-items: center;
@@ -564,7 +578,7 @@ width: 70%;
     text-align: center;
     vertical-align:middle;
     color:  var(--Font2Color);
-    font-size: 18px;
+    font-size: var(--fontZ);
 }
 th {
     color: var(--Font2Color);
@@ -580,9 +594,14 @@ th {
   table {
     width: 100%;
     border: 3px solid  var(--Row1Color);
+
   }
 
   .CellRow{
     background-color:var(--TDColor) ;
+    word-wrap: break-word;
   }
   
+  a[class*="fa"] {
+    font-size: calc(var(--fontZ) - 2);
+  }

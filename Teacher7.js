@@ -25,6 +25,7 @@ let DataTable = [];
 let Periods="Periods";
 let UrlPeriod = `${base}&sheet=${Periods}&tq=${query}`;
 let DataPeriod = [];
+let DaysName=["السبت",  "الاحد",  "الاثنين",  "الثلاثاء",  "الاربعاء",  "الخميس",  "الجمعة"];
 document.addEventListener('DOMContentLoaded', init)
 function init() {
   ConvertMode();
@@ -313,12 +314,13 @@ function ShowTableBrowser(){
 }
 function ShowTableEnD(){
   ShowSelectForm("TableEnd");
- 
   let TableSelect=document.getElementById("TableSelect").value
   if (TableSelect=="1"){
     LoadEndToTable();
-  }else{
+  }else if(TableSelect=="2"){
     LoadEndToTableSection();
+  }else{
+    LoadEndToTableCus();
   }
 }
 function SignOutUser(){
@@ -415,6 +417,7 @@ function AddRow(Num,Fname,Phone,Gender,Email) {
         LoadOptionClassMat();
     })
   }
+
   function LoadOptionClassMat(){
     let Num,ClassN,SectionN;
     let optionClass,optionContract;
@@ -1494,13 +1497,13 @@ let TableTeacher=document.getElementById("TableTeacher").value;
 let TableSemster=document.getElementById("TableSemster").value;
 let SDateT=document.getElementById("SDateT").value;
 let EDateT=document.getElementById("EDateT").value;
-let Num ,SemesterT,TeacherT,DateT,MatT,ClassT,SectionT;
+let SemesterT,TeacherT,DateT,MatT,ClassT,SectionT;
 let Start=new Date(SDateT)
 let EndS=new Date(EDateT)
 const diffTime = Math.abs(EndS - Start);
 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 for (let indexZ = 0; indexZ <= diffDays; indexZ++) {
-if(indexZ == 0){Start=Math.abs( Start.valueOf()) }else{    Start=Math.abs( Start.valueOf() +  1000 *60 *60 *24)}
+if(indexZ == 0){Start=Math.abs( Start.valueOf()) }else{Start=Math.abs( Start.valueOf() +  1000 *60 *60 *24)}
 var Start1=new Date(Start)
 var Start2=Start1.toISOString().slice(0, 10);
 let row = bodydata.insertRow();
@@ -1542,7 +1545,7 @@ function LoadEndToTableSection(){
   let TableSemster=document.getElementById("TableSemster").value;
   let SDateT=document.getElementById("SDateT").value;
   let EDateT=document.getElementById("EDateT").value;
-  let Num ,SemesterT,TeacherT,DateT,MatT,ClassT,SectionT;
+  let SemesterT,TeacherT,DateT,MatT,ClassT,SectionT;
   let Start=new Date(SDateT)
   let EndS=new Date(EDateT)
 const diffTime = Math.abs(EndS - Start);
@@ -1582,16 +1585,91 @@ const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
   }
 }
+function LoadEndToTableCus(){
+  LoadDays()
+  let bodydata=document.getElementById("bodyEnd1");
+  bodydata.innerHTML=""
+  let TableSemster=document.getElementById("TableSemster").value;
+  let SDateT=document.getElementById("SDateT").value;
+  let EDateT=document.getElementById("EDateT").value;
+  let SemesterT,TeacherT,DateT,MatT,ClassT,SectionT,DayT;
+  let Start=new Date(SDateT)
+  var Start1=new Date(Start)
+  var Start2=Start1.toISOString().slice(0, 10);
+  let EndS=new Date(EDateT)
+  var EndS1=new Date(EndS)
+  var EndS2=EndS1.toISOString().slice(0, 10);
+  for (let indexZ = 0; indexZ < DataClass.length; indexZ++) {
+    let row = bodydata.insertRow();
+    row.id="Row1" + bodydata.childElementCount;
+    let cell = row.insertCell();
+    cell.id="Cell1" + bodydata.childElementCount + "ClassSc";
+    cell.innerHTML = DataClass[indexZ].ClassName + "/" + DataClass[indexZ].Section 
+    for (let indexDD = 0; indexDD < DaysName.length; indexDD++){
+      for (let indexP1 = 0; indexP1 < DataPeriod.length ; indexP1++) {
+        cell = row.insertCell();
+        cell.id="R" + indexDD + "_" + indexP1 + "C" +indexZ;
+      }
+    }
+  for (let index = 0; index < DataTable.length; index++) {
+    SemesterT=DataTable[index].SemesterT;
+    TeacherT=DataTable[index].TeacherT;
+    MatT=DataTable[index].MatT;
+    DayT=DataTable[index].DayT;
+    DateT=GetDateFromString( DataTable[index].DateT);
+    if(TableSemster==SemesterT && DateT>=Start2 && DateT<EndS2){
+      for (let indexD = 0; indexD < DaysName.length; indexD++){
+        if(DayT==DaysName[indexD]){
+          for (let indexP = 0; indexP < DataPeriod.length; indexP++) {
+            if(DataPeriod[indexP].PeriodName==DataTable[index].Period){
+              var CellT=document.getElementById("R" + indexD + "_" + indexP + "C" +indexZ)
+              CellT.innerHTML = "مادة "+MatT + " المعلم " + TeacherT ;
+              CellT.className="CellRow"
+            }
+          }
+        }
+    }
+    }
+  }
+}
+}
 
 function ChangeMode(){
   let TableSelect=document.getElementById("TableSelect").value
   let TableTeacher=document.getElementById("TableTeacher")
   let TableSection=document.getElementById("TableSection")
+  let MyTable1=document.getElementById("MyTable1")
+  let MyTable2=document.getElementById("MyTable2")
   if (TableSelect=="1"){
     TableTeacher.style.display="block"
     TableSection.style.display="none"
-  }else{
+    MyTable1.style.display="table"
+    MyTable2.style.display="none"
+  }else if(TableSelect=="2"){
     TableTeacher.style.display="none"
     TableSection.style.display="block"
+    MyTable1.style.display="table"
+    MyTable2.style.display="none"
+  }else{
+    TableTeacher.style.display="none"
+    TableSection.style.display="none"
+    MyTable1.style.display="none"
+    MyTable2.style.display="table"
   }
+}
+
+function LoadDays(){
+  let optionContract;
+  document.getElementById("HeadEnd1").innerHTML="";
+  optionContract=document.createElement("th");
+  optionContract.value="الصف والشعبة/اليوم";
+  optionContract.textContent="الصف والشعبة/اليوم";
+  document.getElementById("HeadEnd1").appendChild(optionContract);
+  for (let indexD = 0; indexD < DaysName.length; indexD++){
+  optionContract=document.createElement("th");
+  optionContract.colSpan=DataPeriod.length
+  document.getElementById("HeadEnd1").appendChild(optionContract);
+  optionContract.value=DaysName[indexD];
+  optionContract.textContent=DaysName[indexD];
+}
 }

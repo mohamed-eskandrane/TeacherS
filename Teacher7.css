@@ -604,12 +604,13 @@ th {
     width: 100%;
     border: 3px solid  var(--Row1Color);
     table-layout: fixed;
+    border-collapse: unset !important;
+    border-spacing: revert !important;
   }
 
   .CellRow{
     background-color:var(--TDColor) ;
     word-wrap: break-word;
-
   }
   
   a[class*="fa"] {

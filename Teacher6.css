@@ -370,7 +370,16 @@ left: 15px;
 font-size: 20px;
 color: white;
 }
-
+.BA input{
+position: fixed;
+top: 20px;
+left: 55px;
+color: var(--Font3Color);
+width: 13%;
+font-size:var(--fonty) ;
+text-align: center;
+font-weight: 700;
+}
 .SignOut{
     display: flex;
     font-size: calc(var(--fontZ) - 1 );
@@ -594,12 +603,13 @@ th {
   table {
     width: 100%;
     border: 3px solid  var(--Row1Color);
-
+    table-layout: fixed;
   }
 
   .CellRow{
     background-color:var(--TDColor) ;
     word-wrap: break-word;
+
   }
   
   a[class*="fa"] {

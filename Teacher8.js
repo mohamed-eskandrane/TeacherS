@@ -43,6 +43,7 @@ function init() {
     }
     if( localStorage.getItem("Teacher_Index")!=null){
       ShowSelectForm(localStorage.getItem("ActiveForm"));
+      document.getElementById("Myusername").value=localStorage.getItem("Teacher_Name");
     }
   }
 }
@@ -218,6 +219,7 @@ function Sign_In(){
     let Teacher_Index = localStorage.getItem("Teacher_Index");
     localStorage.setItem("Teacher_Name", DataTeachers[Teacher_Index].FullName);
     localStorage.setItem("PassWord",DataTeachers[Teacher_Index].PassWord);
+    document.getElementById("Myusername").value=localStorage.getItem("Teacher_Name");
     ShowSelectForm("Main");
   }
 }
@@ -325,6 +327,8 @@ function ShowTableEnD(){
 }
 function SignOutUser(){
   localStorage.removeItem("Teacher_Index");
+  localStorage.removeItem("Teacher_Name");
+  document.getElementById('Myusername').value="";
   ShowSelectForm("loginPage");
 }
 // **************************TeacherBrowser***********
@@ -1625,6 +1629,9 @@ function LoadEndToTableCus(){
               var CellT=document.getElementById("R" + indexD + "_" + indexP + "C" +indexZ)
               CellT.innerHTML = "مادة "+MatT + " المعلم " + TeacherT ;
               CellT.className="CellRow"
+              CellT.style.writingMode= "tb-rl";
+              CellT.style.textOrientation="mixed";
+              CellT.style.transform="rotate(180deg)";
             }
           }
         }
@@ -1664,6 +1671,7 @@ function LoadDays(){
   optionContract=document.createElement("th");
   optionContract.value="الصف والشعبة/اليوم";
   optionContract.textContent="الصف والشعبة/اليوم";
+  optionContract.style.width="10%";
   document.getElementById("HeadEnd1").appendChild(optionContract);
   for (let indexD = 0; indexD < DaysName.length; indexD++){
   optionContract=document.createElement("th");

@@ -16,7 +16,7 @@
 
 @media screen and (min-width: 200px) and (max-width: 450px) {
     :root{
-        --Width:98%;
+        --Width:99%;
         --FrWidth:35%;
         --BWidth:35%;
         --LWidth:35%;
@@ -27,7 +27,7 @@
   }
 @media screen and (min-width: 451px)and (max-width: 650px)  {
     :root{
-        --Width:97%;
+        --Width:98%;
         --FrWidth:35%;
         --BWidth:35%;
         --LWidth:35%;
@@ -39,7 +39,7 @@
 
 @media screen and (min-width: 651px)and (max-width: 800px)  {
     :root{
-        --Width:96%;
+        --Width:97%;
         --FrWidth:40%;
         --BWidth:35%;
         --LWidth:35%;
@@ -50,7 +50,7 @@
 }
 @media screen and (min-width: 801px)  {
     :root{
-        --Width:95%;
+        --Width:96%;
         --FrWidth:45%;
         --BWidth:35%;
         --LWidth:35%;
@@ -83,14 +83,33 @@
     }
     .hh .SignOut{
         display: none  !important;
+        
     }
 
     .hh{
         border: none !important;
         position: absolute !important;
-
+        right: 10px !important;
     }
- 
+
+    .hh select,.hh input{
+        width: 25% !important;
+    }
+    #TableWeaks{
+        width: 10% !important;
+        margin-left: 10px !important;
+    }
+
+    .hh input[type=date]{
+        width: 22% !important;
+        margin-left: 5px !important;
+    }
+    #DetailStudent{
+        border: none !important;
+        position: absolute !important;
+        left: 10px !important;
+        width: 300px !important;
+    }
     h4{
     display: none;
     }
@@ -324,7 +343,7 @@ padding-right: 5px;
     width: 20%;
     text-align: center;
    }
-.user-box input , .user-box select ,.hh select ,.hh input{
+.user-box input , .user-box select ,.hh select ,.hh input,.TeacherTable,#TeacherName{
     width: 70%;
     font-size: var( --fontX);
     color: var(--Font3Color);
@@ -335,8 +354,14 @@ padding-right: 5px;
     border: none;
     text-align: center;
     border-radius: 25px;
+}
+
+    .TeacherTable{
+        cursor:pointer;
+        width: 95%;
+        font-size: 18px;
     }
-    
+
     /* .user-box button {
         width: 20%;
        } */
@@ -616,3 +641,10 @@ th {
   a[class*="fa"] {
     font-size: calc(var(--fontZ) - 2);
   }
+#TeacherName{
+    display: block;
+    height: 20px;
+    padding: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
